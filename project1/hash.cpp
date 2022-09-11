@@ -1,5 +1,6 @@
 #include <iostream>
 #include "hash.h"
+
 using namespace std;
 hashTable::hashTable(int size) {
     
@@ -11,24 +12,28 @@ hashTable::hashTable(int size) {
 
 int hashTable::insert(const std::string &key, void *pv){
     int pos = hash(key);
+    
     if(contains(key))
         return 1;
     
     if((filled/capacity) > 0.5) {
         rehash();
     }
-    if(data[pos].isOccupied) {
+    while(data[pos].isOccupied) {
     //linear probing
+   
         pos++;
+        
     //wraparound
-    if(++pos == capacity)
+  if((pos+1) == capacity)
     pos = 0;
-    }  else {
+    } 
+ cout << pos << endl;
         data[pos].key = key;
         data[pos].isOccupied = true;
         filled++;
-        cout << pos << key << hash(key) << endl;
-    }
+
+    
         return 0;
 
 }
@@ -44,7 +49,7 @@ bool hashTable::contains(const string &key) {
     }
     else {
         pos++;
-    if(++pos == capacity)
+    if((pos+1) == capacity)
         pos = 0;
     }
    
@@ -63,7 +68,17 @@ int hashTable::hash(const std::string &key) {
 
 bool hashTable::rehash() {
     vector<hashItem> OldData = data;
+    data.clear();
+    capacity = getPrime(2 * capacity);
+    data.resize(capacity);
     
+    for (auto &x : OldData) {
+        if(x.isOccupied)
+        insert(x.key);
+        return true;
+    }
+    return false;
+
 
 }
 
@@ -79,10 +94,6 @@ unsigned int hashTable::getPrime(int size) {
    
     
 int main() {
-hashTable h1;
-
-
-cout << h1.contains("hello") << endl;
 
 
 }
