@@ -41,8 +41,8 @@ class hashTable {
   // Returns true on success,
   // false if the specified key is not in the hash table.
   bool remove(const std::string &key);
-
- private:
+public: //make private later!
+//private:
 
   // Each item in the hash table contains:
   // key - a string used as a key.
@@ -60,7 +60,6 @@ class hashTable {
 
     hashItem() = default;
   };
-public:
   int capacity; // The current capacity of the hash table.
   int filled; // Number of occupied items in the table.
 
