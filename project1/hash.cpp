@@ -9,7 +9,7 @@ hashTable::hashTable(int size) {
 
 }
 
-int hashTable::insert(const string &key, void *pv = nullptr) {
+int hashTable::insert(const std::string &key, void *pv){
     int pos = hash(key);
     if(contains(key))
         return 1;
@@ -27,13 +27,29 @@ int hashTable::insert(const string &key, void *pv = nullptr) {
         data[pos].key = key;
         data[pos].isOccupied = true;
         filled++;
+        cout << pos << key << hash(key) << endl;
     }
-
+        return 0;
 
 }
 
-bool hashTable::contains(const string &key) {
 
+bool hashTable::contains(const string &key) {
+    int pos = hash(key);
+    if(!data[pos].isOccupied)
+    return false;
+  while(data[pos].isOccupied) {
+    if(data[pos].key == key) {
+    return true;
+    }
+    else {
+        pos++;
+    if(++pos == capacity)
+        pos = 0;
+    }
+   
+    }
+    return false;
 }
 
 int hashTable::hash(const std::string &key) {
@@ -46,7 +62,9 @@ int hashTable::hash(const std::string &key) {
 }
 
 bool hashTable::rehash() {
-return 0;
+    vector<hashItem> OldData = data;
+    
+
 }
 
 unsigned int hashTable::getPrime(int size) {
@@ -62,6 +80,9 @@ unsigned int hashTable::getPrime(int size) {
     
 int main() {
 hashTable h1;
+
+
+cout << h1.contains("hello") << endl;
 
 
 }
