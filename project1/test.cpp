@@ -4,14 +4,15 @@
 using namespace std;
 
 int main() {
+string s = "hello";
+while(1) {
+char c;
+cin >> c;
+if((c >= '0' && c<='9') ||(c >= 'A' && c<= 'Z') || (c >= 'a' && c<= 'z') ) {
+    cout << "yo" << endl;
+}
 
-vector<string> test;
-
-test.resize(10);
-int pos = 3;
-
-if((pos++) == 4)
-cout << "hello" << endl;
+}
 
 }
 
