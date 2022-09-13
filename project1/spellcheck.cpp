@@ -17,11 +17,23 @@ ifstream inputfile (dict);
 
     return 0;
 }
-void testfunc(hashTable &hash) {
-    cout << hash.data.size() << endl;
+
+int spellcheck(const string &inputname, const string &outputname, hashTable &hashtable) {
+    ifstream inputfile (inputname);
+        string line;
+        string buf = "";
+        
+        if(inputfile.is_open())
+        while(getline(inputfile, line)) {
+       for(auto &c : line) {
+    if((c >= '0' && c<='9') ||(c >= 'A' && c<= 'Z') || (c >= 'a' && c<= 'z') || (c == '\'') || (c == '-')) {
+            buf+=c;
+}   else {
+    buf = "";
 }
-int spellcheck(const string &inputfile, const string &outputfile, hashTable &hashtable) {
-    return 0;
+       }
+        }
+return 0;
 }
 int main() {
 
@@ -37,5 +49,8 @@ clock_t t2 = clock();
 double timetopars = ((double)(t2-t1)) /CLOCKS_PER_SEC;
 cout << "Total time (in seconds) to load dictionary: " << timetopars << '\n';
 cout << "Enter name of input file: ";
+cin >> inputfile;
+cout << "Enter the name of the outputfile: ";
+spellcheck(inputfile, outputfile, h1);
 
 }
