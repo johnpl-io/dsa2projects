@@ -16,27 +16,28 @@ int hashTable::insert(const std::string &key, void *pv){
     if(contains(key))
         return 1;
     
-    if((filled/capacity) > 0.5) {
-        rehash();
-    }
+
     while(data[pos].isOccupied) {
     //linear probing
    
         pos++;
         
     //wraparound
-  if((pos+1) == capacity)
+  if(pos == capacity)
     pos = 0;
     } 
- cout << pos << endl;
+
         data[pos].key = key;
         data[pos].isOccupied = true;
         filled++;
-
+    if((2*filled) > capacity) {
+        rehash();
+    }
     
         return 0;
 
 }
+
 
 
 bool hashTable::contains(const string &key) {
@@ -49,7 +50,7 @@ bool hashTable::contains(const string &key) {
     }
     else {
         pos++;
-    if((pos+1) == capacity)
+    if(pos == capacity)
         pos = 0;
     }
    
@@ -71,19 +72,18 @@ bool hashTable::rehash() {
     data.clear();
     capacity = getPrime(2 * capacity);
     data.resize(capacity);
-    
+    filled = 0;
     for (auto &x : OldData) {
         if(x.isOccupied)
         insert(x.key);
-        return true;
     }
-    return false;
+    return true;
 
 
 }
 
 unsigned int hashTable::getPrime(int size) {
-    const int primes[] = {53, 97, 193, 389, 769, 1543, 3079, 6151, 12289, 24593, 49157, 98317, 196613, 393241, 786433, 1572869, 3145739, 6291469, 12582917, 25165843, 50331653, 100663319, 201326611, 402653189, 805306457, 1610612741};
+    const int primes[] = {3,7,53, 97, 193, 389, 769, 1543, 3079, 6151, 12289, 24593, 49157, 98317, 196613, 393241, 786433, 1572869, 3145739, 6291469, 12582917, 25165843, 50331653, 100663319, 201326611, 402653189, 805306457, 1610612741};
      for(auto i : primes) {
         if(size < i)
         return i;
@@ -94,6 +94,11 @@ unsigned int hashTable::getPrime(int size) {
    
     
 int main() {
+
+hashTable h1;
+h1.insert("hello");
+h1.insert("test");
+h1.insert("yourmom");
 
 
 }
