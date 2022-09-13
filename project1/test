@@ -1,10 +1,10 @@
-# 0 "/home/john/Documents/dsa2projects/project1/hash.cpp"
+# 0 "/home/john/Documents/dsa2projects/project1/test.cpp"
 # 1 "/home/john/Documents/dsa2projects/project1//"
 # 0 "<built-in>"
 # 0 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 0 "<command-line>" 2
-# 1 "/home/john/Documents/dsa2projects/project1/hash.cpp"
+# 1 "/home/john/Documents/dsa2projects/project1/test.cpp"
 # 1 "/usr/include/c++/12.2.0/iostream" 1 3
 # 36 "/usr/include/c++/12.2.0/iostream" 3
        
@@ -33730,11 +33730,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 
 }
-# 2 "/home/john/Documents/dsa2projects/project1/hash.cpp" 2
-# 1 "/home/john/Documents/dsa2projects/project1/hash.h" 1
-
-
-
+# 2 "/home/john/Documents/dsa2projects/project1/test.cpp" 2
 # 1 "/usr/include/c++/12.2.0/vector" 1 3
 # 58 "/usr/include/c++/12.2.0/vector" 3
        
@@ -38341,167 +38337,20 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 
 }
-# 5 "/home/john/Documents/dsa2projects/project1/hash.h" 2
+# 3 "/home/john/Documents/dsa2projects/project1/test.cpp" 2
 
 
-
-# 7 "/home/john/Documents/dsa2projects/project1/hash.h"
-class hashTable {
-
- public:
-
-
-
-
-  hashTable(int size = 0);
-
-
-
-
-
-
-
-  int insert(const std::string &key, void *pv = nullptr);
-
-
-
-  bool contains(const std::string &key);
-
-
-
-
-
-
-  void *getPointer(const std::string &key, bool *b = nullptr);
-
-
-
-
-  int setPointer(const std::string &key, void *pv);
-
-
-
-
-  bool remove(const std::string &key);
-public:
-# 54 "/home/john/Documents/dsa2projects/project1/hash.h"
-  class hashItem {
-  public:
-    std::string key {""};
-    bool isOccupied {false};
-    bool isDeleted {false};
-    void *pv {nullptr};
-
-    hashItem() = default;
-  };
-  int capacity;
-  int filled;
-
-  std::vector<hashItem> data;
-
-
-  int hash(const std::string &key);
-
-
-
-  int findPos(const std::string &key);
-
-
-
-  bool rehash();
-
-
-
-  static unsigned int getPrime(int size);
-};
-# 3 "/home/john/Documents/dsa2projects/project1/hash.cpp" 2
-
+# 4 "/home/john/Documents/dsa2projects/project1/test.cpp"
 using namespace std;
-hashTable::hashTable(int size) {
 
-    capacity = getPrime(size);
-    data.resize(capacity);
-    filled = 0;
+int main() {
 
-}
+vector<string> test;
 
-int hashTable::insert(const std::string &key, void *pv){
-    int pos = hash(key);
+test.resize(10);
+int pos = 3;
 
-    if(contains(key))
-        return 1;
-
-
-    while(data[pos].isOccupied) {
-
-
-        pos++;
-
-
-  if(pos == capacity)
-    pos = 0;
-    }
-
-        data[pos].key = key;
-        data[pos].isOccupied = true;
-        filled++;
-    if((2*filled) > capacity) {
-        rehash();
-    }
-
-        return 0;
+if((pos++) == 4)
+cout << "hello" << endl;
 
 }
-
-
-
-bool hashTable::contains(const string &key) {
-    int pos = hash(key);
-    if(!data[pos].isOccupied)
-    return false;
-  while(data[pos].isOccupied) {
-    if(data[pos].key == key) {
-    return true;
-    }
-    else {
-        pos++;
-    if(pos == capacity)
-        pos = 0;
-    }
-
-    }
-    return false;
-}
-
-int hashTable::hash(const std::string &key) {
- unsigned int hashVal = 0;
-    for (char ch : key) {
-        hashVal = 37 * hashVal +ch;
-
-    }
-    return hashVal % capacity;
-}
-
-bool hashTable::rehash() {
-    vector<hashItem> OldData = data;
-    data.clear();
-    capacity = getPrime(2 * capacity);
-    data.resize(capacity);
-    filled = 0;
-    for (auto &x : OldData) {
-        if(x.isOccupied)
-        insert(x.key);
-    }
-    return true;
-
-
-}
-
-unsigned int hashTable::getPrime(int size) {
-    const int primes[] = {3,7,53, 97, 193, 389, 769, 1543, 3079, 6151, 12289, 24593, 49157, 98317, 196613, 393241, 786433, 1572869, 3145739, 6291469, 12582917, 25165843, 50331653, 100663319, 201326611, 402653189, 805306457, 1610612741};
-     for(auto i : primes) {
-        if(size < i)
-        return i;
-     }
-    return -1;
-    }

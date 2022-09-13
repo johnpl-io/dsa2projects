@@ -93,13 +93,5 @@ unsigned int hashTable::getPrime(int size) {
 
    
     
-int main() {
 
-hashTable h1;
-h1.insert("hello");
-h1.insert("test");
-h1.insert("yourmom");
-
-
-}
 
