@@ -37,6 +37,7 @@ public:
   //   0 on success
   //   1 if a node with the given id does not exist
   //
+  
   int setKey(const std::string &id, int key);
 
   //
@@ -64,7 +65,7 @@ public:
   // Returns:
   //   0 on success
   //   1 if a node with the given id does not exist
-  //
+
   int remove(const std::string &id, int *pKey = nullptr, void *ppData = nullptr);
   //private: 
   class node { // An inner class within heap
@@ -79,7 +80,7 @@ public:
   int capacity; //capacity of the heap
   void percolateUp(int posCur);
   void percolateDown(int posCur);
-
+  int getPos(node *pn);
   };
 
 
