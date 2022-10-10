@@ -18,14 +18,14 @@ using namespace std;
 int main()
 {
 heap h1 = heap(10);
-h1.data[1].key = 3;
-h1.percolateUp(1);
-h1.data[2].key = 4;
-h1.percolateUp(2);
-h1.data[3].key = -1;
-h1.percolateUp(3);
+h1.insert("hello", 2);
+h1.insert("test1", 3);
+h1.insert("test2", 4);
+h1.setKey("hello", 6);
+h1.insert("hello4", 3);
+h1.insert("hello5", 2);
 
-for(auto i : h1.data) {
-  cout << i.key << endl;
+for (auto i: h1.data) {
+    cout << i.key << endl;
 }
 }

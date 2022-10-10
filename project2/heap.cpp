@@ -34,7 +34,49 @@ bool b;
   if(!b) {
     return 1;
   }
-  
+
+  if(pn->key < key) {
+    pn->key = key;
+    percolateDown(getPos(pn));
+  }
+  if(pn->key > key) {
+    pn->key = key;
+    percolateUp(getPos(pn));
+  }
+  //otherwise the key is exactly the same;
+  return 0;
+}
+
+int heap::deleteMin(std::string *pId, int *pKey, void *ppData) {
+    if(currentSize == 0) {
+        return 1;
+    }
+    if(pId) 
+        *pId = data[1].id;
+    if(pKey)
+        *pKey = data[1].key;
+    mapping.remove(data[1].id);
+    data[1] = data[currentSize--];
+    mapping.setPointer(data[1].id, &data[1]);
+    percolateDown(1);
+    data[currentSize + 1]  = node();
+
+    return 0;
+
+};
+
+int heap::remove(const std::string &id, int *pKey, void *ppData) {
+bool b;
+  node *pn = static_cast<node *> (mapping.getPointer(id, &b));
+  if(!b) {
+    return 1;
+  }
+  if(pKey) {
+    *pKey = data[getPos(pn)].key;
+  }
+  setKey(id, data[1].key - 100);
+  deleteMin();
+return 0;
 
 }
  //similar to textbook example page 268
@@ -45,7 +87,7 @@ for(; posCur > 1 && tmp.key < data[posCur/2].key; posCur/=2) {
   mapping.setPointer(data[posCur].id, &data[posCur]);
 }
 data[posCur] = tmp;
-
+mapping.setPointer(data[posCur].id, &data[posCur]);
 }
 //similar to textbook example page 271
 void heap::percolateDown(int posCur) {
@@ -58,11 +100,13 @@ for(; posCur*2 <= currentSize; posCur = child) {
     }
     if(data[child].key < tmp.key) {
         data[posCur] = data[child];
+        mapping.setPointer(data[posCur].id, &data[posCur]);
     }
     else 
         break;
 }
 data[posCur] = tmp;
+mapping.setPointer(data[posCur].id, &data[posCur]);
 }
 
 int heap::getPos(node *pn) {
