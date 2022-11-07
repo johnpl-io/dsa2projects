@@ -19,7 +19,7 @@ int hashTable::insert(const std::string &key, void *pv){
 
 
 	while(data[pos].isOccupied) {
-		//linear probing is used to find the next empty slot in the hash table
+	//linear probing is used to find the next empty slot in the hash table
 
 		pos++;
 
@@ -34,7 +34,7 @@ int hashTable::insert(const std::string &key, void *pv){
 	data[pos].isDeleted = false;
 	filled++;
 	if((2*filled) > capacity) {
-		//rehash once load factor is greater than or equal to 0.5
+	//rehash once load factor is greater than or equal to 0.5
 		rehash();
 	}
 
@@ -67,26 +67,26 @@ bool hashTable::contains(const string &key) {
 
 
 bool hashTable::remove(const std::string &key) {
-	int pos = findPos(key);
-	if(pos == -1) {
-		return false;
+int pos = findPos(key);
+if(pos == -1) {
+	return false;
 
-	} else {
-		data[pos].isDeleted = true;
-		return true;
-	} 
+} else {
+	data[pos].isDeleted = true;
+	return true;
+} 
 }
 
 void  * hashTable::getPointer(const std::string &key, bool *b) {
-	int pos = findPos(key);
-	if (pos == -1) {
-		if(b) {
-			*b = false;
-		}
-		return nullptr;
+int pos = findPos(key);
+if (pos == -1) {
+	if(b) {
+		*b = false;
 	}
+	return nullptr;
+}
 	if(b)
-		*b = true;
+	*b = true;
 	return data[pos].pv;
 }
 
@@ -116,8 +116,8 @@ int hashTable::hash(const std::string &key) {
 
 
 bool hashTable::rehash() {
-	//uses a temp vector and clear and resize the old one and then refills the old one 
-	//with its new size
+//uses a temp vector and clear and resize the old one and then refills the old one 
+//with its new size
 	vector<hashItem> OldData = data;
 	data.clear();
 	capacity = getPrime(2 * capacity);
@@ -133,7 +133,7 @@ bool hashTable::rehash() {
 }
 
 unsigned int hashTable::getPrime(int size) {
-	//primes that are suitable for hash tables
+//primes that are suitable for hash tables
 	const int primes[] = {3, 5,7, 53, 97, 193, 389, 769, 1543, 3079, 6151, 12289, 24593, 49157, 98317, 196613, 393241, 786433, 1572869, 3145739, 6291469, 12582917, 25165843, 50331653, 100663319, 201326611, 402653189, 805306457, 1610612741};
 	for(auto i : primes) {
 		if(size < i)
@@ -141,5 +141,6 @@ unsigned int hashTable::getPrime(int size) {
 	}
 	return -1;
 }
-
-
+//int main() {
+//	cout << "yo" << endl;
+//}
