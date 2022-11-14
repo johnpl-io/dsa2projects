@@ -25,6 +25,11 @@ class Graph {
 		};
 		std::list<node> Graph_nodes;
 		hashTable vertices;
+		int size;
+
+
 };
+
+
 
 #endif 
