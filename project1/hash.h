@@ -41,8 +41,7 @@ class hashTable {
   // Returns true on success,
   // false if the specified key is not in the hash table.
   bool remove(const std::string &key);
-public: //make private later!
-//private:
+private:
 
   // Each item in the hash table contains:
   // key - a string used as a key.
